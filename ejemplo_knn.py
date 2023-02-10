@@ -1,0 +1,40 @@
+import numpy as np
+from knn import KNN
+
+x1 = np.array([[49],[1.43],[2.4]])
+x2 = np.array([[51],[1.55],[2.7]])
+x3 = np.array([[57],[1.58],[2.9]])
+x4 = np.array([[47],[1.55],[2.2]])
+x5 = np.array([[54],[1.60],[2.1]])
+x6 = np.array([[56],[1.58],[2.6]])
+x7 = np.array([[59],[1.64],[2.4]])
+x8 = np.array([[53],[1.61],[2.8]])
+x9 = np.array([[58],[1.63],[2.3]])
+x10 = np.array([[52],[1.60],[2.0]])
+x11 = np.array([[75],[1.73],[2.3]])
+x12 = np.array([[80],[1.75],[2.9]])
+x13 = np.array([[75],[1.69],[2.3]])
+x14 = np.array([[65],[1.71],[2.6]])
+x15 = np.array([[75],[1.79],[2.8]])
+x16 = np.array([[77],[1.76],[2.2]])
+x17 = np.array([[65],[1.71],[2.8]])
+x18 = np.array([[70],[1.70],[2.3]])
+x19 = np.array([[78],[1.81],[2.6]])
+x20 = np.array([[70],[1.67],[2.2]])
+
+c0 = np.zeros(10)
+c1 = np.ones(10)
+
+X = np.concatenate((x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13, x14, x15, x16, x17, x18, x19, x20), axis = 1)
+C = np.concatenate((c0, c1), axis = 0)
+C = np.uint8(C)
+
+y1 = np.array([[62], [1.73],[5.6]])
+y2 = np.array([[70], [1.78],[5.0]])
+y3 = np.array([[53], [1.68],[5.9]])
+Y = np.concatenate((y1, y2, y3), axis = 1)
+
+clasificador = KNN(k=5)
+clasificador.aprendizaje(X, C)
+clasificar = clasificador.clasificacion(Y)
+print('clases de los puntos y(n):', clasificar)
