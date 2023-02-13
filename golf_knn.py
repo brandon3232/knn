@@ -1,5 +1,6 @@
 import numpy as np
 from knn import KNN
+from knn import eficiencia
 import pandas as pd
 import os
 
@@ -22,8 +23,35 @@ clases_prueba = prueba['play'].values
 entrenamiento_sin_clases = entrenamiento.drop(['play'], axis=1).values
 prueba_sin_clases = prueba.drop(['play'], axis=1).values
 
-clasificador = KNN(k=5)#elejimos el valor de K
+
+### k =3
+clasificador = KNN(k=3)#elejimos el valor de K
 clasificador.aprendizaje(entrenamiento_sin_clases, clases_entrenamiento)#entrenamos el modelo
 clasificar = clasificador.clasificacion(prueba_sin_clases)#usamos el conjunto de prueba para verificar la presicion de nuestro modelo
 print('clases predichas de los puntos y(n):', clasificar)#imprimimos las clases predichas por el modelo
 print("clases de los puntos y(n)", clases_prueba)#imprimimos las clases originales de nuestro conjunto de prueba
+
+val = eficiencia(clasificar, clases_prueba)#se llama a la funcion para validar la tasa de error 
+print(f"El porcentaje de eficiencia para k = 3 es de {val}")
+
+
+### k = 5
+clasificador = KNN(k=5)
+clasificador.aprendizaje(entrenamiento_sin_clases, clases_entrenamiento)
+clasificar = clasificador.clasificacion(prueba_sin_clases)
+print('\n\nclases predichas de los puntos y(n):', clasificar)
+print("clases de los puntos y(n)", clases_prueba)
+
+val = eficiencia(clasificar, clases_prueba)
+print(f"El porcentaje de eficiencia para k = 5 es de {val}")
+
+
+### k = 7
+clasificador = KNN(k=7)
+clasificador.aprendizaje(entrenamiento_sin_clases, clases_entrenamiento)
+clasificar = clasificador.clasificacion(prueba_sin_clases)
+print('\n\nclases predichas de los puntos y(n):', clasificar)
+print("clases de los puntos y(n)", clases_prueba)
+
+val = eficiencia(clasificar, clases_prueba)
+print(f"El porcentaje de eficiencia para k = 7 es de {val}")

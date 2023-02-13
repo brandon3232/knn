@@ -29,3 +29,10 @@ class KNN:
 
 def EUCLIDIANA(x, y):
     return np.sqrt(np.sum((x-y)**2))
+
+def eficiencia(prediccion, clases):
+    suma = 0
+    for i in range(clases.shape[0]):
+        if clases[i] != prediccion[i]:
+            suma += 1
+    return 1 - (suma / clases.shape[0])
