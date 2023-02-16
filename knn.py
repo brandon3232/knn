@@ -36,10 +36,11 @@ class KNN:
             c = Counter(k_etiquetas).most_common(1)#(5,0)
             clases.append(c[0][0]) # almacenamos la clase asignada al vector y(n)
         
-        print('\ndistancias ordenadas para el conjunto de prueba\n')
-        print(distanciasDesordenadas)
         print('\ndistancias desordenadas para el conjunto de prueba\n')
         print(distanciasOrdenadas)
+        print('\ndistancias ordenadas para el conjunto de prueba\n')
+        print(distanciasDesordenadas)
+        
         return clases
 
 def EUCLIDIANA(x, y):

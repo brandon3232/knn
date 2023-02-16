@@ -9,7 +9,7 @@ path = os.getcwd()
 #cargamos el archivo
 golf = pd.read_csv(path+"/GOLF.csv")  
 
-print("dataset")
+print("dataset\n")
 print(golf)
 print("\n")
 
@@ -47,14 +47,16 @@ clasificador.aprendizaje(entrenamiento_sin_clases, clases_entrenamiento)
 #usamos el conjunto de prueba para verificar la presicion de nuestro modelo
 clasificar = clasificador.clasificacion(prueba_sin_clases)
 
-#imprimimos las clases predichas por el modelo
-print('\nclases predichas de los puntos y(n):', clasificar)
-#imprimimos las clases originales de nuestro conjunto de prueba
-print("clases de los puntos y(n)", clases_prueba)
+matriz = pd.DataFrame()
+matriz['predichas'] = clasificar
+matriz['originales'] = clases_prueba
+
+print("\ncomparacion de clases predichas\n")
+print(matriz)
 
 #se llama a la funcion para validar la tasa de error 
 val = eficiencia(clasificar, clases_prueba)
-print(f"El porcentaje de eficiencia para k = 3 es de {val}")
+print(f"\nEl porcentaje de eficiencia para k = 3 es de {val}")
 
 
 ### k = 5
@@ -63,11 +65,15 @@ clasificador = KNN(k=5)
 clasificador.aprendizaje(entrenamiento_sin_clases, clases_entrenamiento)
 clasificar = clasificador.clasificacion(prueba_sin_clases)
 
-print('\n\nclases predichas de los puntos y(n):', clasificar)
-print("clases de los puntos y(n)", clases_prueba)
+matriz = pd.DataFrame()
+matriz['predichas'] = clasificar
+matriz['originales'] = clases_prueba
+
+print("\ncomparacion de clases predichas\n")
+print(matriz)
 
 val = eficiencia(clasificar, clases_prueba)
-print(f"El porcentaje de eficiencia para k = 5 es de {val}")
+print(f"\nEl porcentaje de eficiencia para k = 5 es de {val}")
 
 
 ### k = 7
@@ -76,8 +82,12 @@ clasificador = KNN(k=7)
 clasificador.aprendizaje(entrenamiento_sin_clases, clases_entrenamiento)
 clasificar = clasificador.clasificacion(prueba_sin_clases)
 
-print('\n\nclases predichas de los puntos y(n):', clasificar)
-print("clases de los puntos y(n)", clases_prueba)
+matriz = pd.DataFrame()
+matriz['predichas'] = clasificar
+matriz['originales'] = clases_prueba
+
+print("\ncomparacion de clases predichas\n")
+print(matriz)
 
 val = eficiencia(clasificar, clases_prueba)
-print(f"El porcentaje de eficiencia para k = 7 es de {val}")
+print(f"\nEl porcentaje de eficiencia para k = 7 es de {val}")
