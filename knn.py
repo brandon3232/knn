@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 from collections import Counter
 
 class KNN:
@@ -13,18 +14,32 @@ class KNN:
         
     def clasificacion(self, Y):
         clases = []
+        distanciasOrdenadas = pd.DataFrame()
+        distanciasDesordenadas = pd.DataFrame()
         for i in range(Y.shape[0]): # por cada vector y(n) a clasificar
             distancias = np.empty(self.n_muestras)
             for n in range(self.n_muestras): # por cada vector x(n) de caracteristicas
                 distancias[n] = EUCLIDIANA(self.caracteristicas[n], Y[i])
-            
+
             # distancias mas cercanas
             k_distancias = np.argsort(distancias)
+            
             # identificar las k distancias - clases
             k_etiquetas = self.C[k_distancias[:self.k]]
+            
+            distanciasOrdenadas[f'p{i}'] = distancias
+            distanciasOrdenadas[f'clase_p{i}'] = self.C
+            distanciasDesordenadas[f'p{i}'] = distancias[k_distancias]
+            distanciasDesordenadas[f'clase_p{i}'] = self.C[k_distancias]
+            
             #votacion
             c = Counter(k_etiquetas).most_common(1)#(5,0)
             clases.append(c[0][0]) # almacenamos la clase asignada al vector y(n)
+        
+        print('\ndistancias ordenadas para el conjunto de prueba\n')
+        print(distanciasDesordenadas)
+        print('\ndistancias desordenadas para el conjunto de prueba\n')
+        print(distanciasOrdenadas)
         return clases
 
 def EUCLIDIANA(x, y):
